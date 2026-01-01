@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Japan Survival Study Guide</title>
+<style>
+  :root{
+    /* Soft, eye-friendly document theme inspired by your app’s clean panels and rounded controls */
+    --bg:#F4F6FB;
+    --bg2:#EEF2FA;
+    --panel: rgba(255,255,255,.86);
+    --panel2: rgba(255,255,255,.94);
+    --border: rgba(15,23,42,.10);
+    --text:#0F172A;
+    --muted:#475569;
+    --muted2:#64748B;
+    --accent:#2F6FED;
+    --shadow: 0 18px 50px rgba(15,23,42,.08);
+    --radius: 18px;
+    --radius2: 22px;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    --max: 980px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family: var(--sans);
+    color: var(--text);
+    line-height: 1.6;
+    background:
+      radial-gradient(1200px 700px at 25% -10%, rgba(47,111,237,.14), transparent 60%),
+      radial-gradient(900px 700px at 85% 0%, rgba(22,139,85,.08), transparent 62%),
+      radial-gradient(900px 700px at 10% 70%, rgba(180,35,24,.05), transparent 62%),
+      linear-gradient(180deg, var(--bg), var(--bg2));
+  }
+
+  a{ color: var(--accent); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+
+  /* Top bar */
+  .topbar{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 18px 16px 10px;
+    display:flex;
+    gap: 14px;
+    align-items:flex-start;
+    justify-content: space-between;
+  }
+  .brandTitle{ font-weight: 820; font-size: 22px; letter-spacing: .2px; }
+  .brandSub{ color: var(--muted2); font-size: 13px; margin-top: 6px; max-width: 760px; }
+  .pill{
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.72));
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+    padding: 10px 12px;
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: 13px;
+    white-space: nowrap;
+    height: fit-content;
+  }
+
+  /* Layout */
+  .layout{
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 8px 16px 30px;
+    display:grid;
+    grid-template-columns: 360px 1fr;
+    gap: 14px;
+  }
+
+  /* Panels */
+  .sidebar, .content{
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+    border-radius: var(--radius2);
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .sidebarInner{ padding: 14px; }
+  .tocTitle{ font-weight: 820; font-size: 14px; letter-spacing: .2px; }
+  .toc{ display:flex; flex-direction:column; gap: 8px; margin-top: 12px; }
+  .tocLink{
+    display:block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(15,23,42,.08);
+    background: rgba(255,255,255,.66);
+    color: var(--text);
+    font-weight: 720;
+    font-size: 13px;
+    transition: transform .08s ease, filter .12s ease;
+  }
+  .tocLink:hover{ filter: brightness(1.02); transform: translateY(-1px); }
+  .sidebarNote{ margin-top: 14px; color: var(--muted2); font-size: 12px; line-height: 1.5; }
+
+  .content{ padding: 18px 18px 8px; }
+  .section{ max-width: var(--max); }
+  .section + .section{ margin-top: 26px; padding-top: 18px; border-top: 1px solid rgba(15,23,42,.08); }
+  h2{ margin: 0 0 10px; font-size: 18px; letter-spacing: .15px; }
+  h3{ margin: 18px 0 10px; font-size: 14px; }
+  p{ margin: 10px 0; color: var(--muted); }
+  .lede{ font-size: 15px; color: var(--muted); }
+  .miniNote{ color: var(--muted2); font-size: 13px; }
+
+  /* Callouts and prompts */
+  .callout{
+    margin: 14px 0 0;
+    border-left: 3px solid rgba(47,111,237,.55);
+    background: rgba(47,111,237,.045);
+    border-radius: 14px;
+    padding: 12px 12px;
+  }
+  .calloutTitle{ font-weight: 840; color: var(--text); margin-bottom: 8px; }
+  .calloutBody{ color: var(--muted); }
+  .prompts{ display:grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px; }
+  .prompt{
+    border: 1px solid rgba(15,23,42,.10);
+    background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.78));
+    border-radius: var(--radius);
+    padding: 12px 12px;
+    box-shadow: 0 10px 22px rgba(15,23,42,.08);
+  }
+  .promptTop{ display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+  .promptTitle{ font-weight: 840; }
+  .promptTag{ color: var(--muted2); font-size: 12px; }
+  .promptBody{
+    margin: 10px 0 0;
+    background: rgba(15,23,42,.03);
+    border: 1px solid rgba(15,23,42,.06);
+    border-radius: 14px;
+    padding: 10px 10px;
+    white-space: pre-wrap;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: #111827;
+  }
+
+  /* Vocabulary blocks */
+  .vocabBlock{
+    margin-top: 10px;
+    border: 1px solid rgba(15,23,42,.10);
+    border-radius: var(--radius);
+    overflow:hidden;
+    background: rgba(255,255,255,.78);
+  }
+  .vocabLine{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr 1.1fr 1.3fr;
+    gap: 10px;
+    padding: 10px 12px;
+    border-top: 1px solid rgba(15,23,42,.06);
+    align-items: start;
+  }
+  .vocabLine:first-child{ border-top:none; }
+  .vocabLine .en{ font-weight: 750; color: var(--text); }
+  .vocabLine .jp{ font-weight: 850; color: var(--text); }
+  .vocabLine .ro{ font-family: var(--mono); color: var(--muted); font-weight: 650; font-size: 12.5px; }
+  .vocabLine .pr{ font-family: var(--mono); color: var(--muted2); font-weight: 650; font-size: 12.5px; }
+
+  /* Details / collapsible */
+  .details{ margin-top: 12px; border: 1px solid rgba(15,23,42,.10); border-radius: var(--radius); overflow:hidden; background: rgba(255,255,255,.74); }
+  summary{
+    cursor: pointer;
+    padding: 12px 12px;
+    font-weight: 820;
+    color: var(--text);
+    list-style: none;
+  }
+  summary::-webkit-details-marker{ display:none; }
+
+  summary{
+    position: relative;
+    padding-right: 34px;
+  }
+  summary::after{
+    content: "▾";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted2);
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1;
+    transition: transform .14s ease;
+  }
+  .details[open] summary::after{
+    transform: translateY(-50%) rotate(180deg);
+  }
+
+  .details[open] summary{ border-bottom: 1px solid rgba(15,23,42,.08); background: rgba(255,255,255,.86); }
+  .details > :not(summary){ padding: 0 12px 12px; }
+
+  /* Appendix spacing */
+  .appendix .details{ margin-top: 10px; }
+
+  .mono{ font-family: var(--mono); }
+
+
+  /* TOC drawer (frees main width) */
+  .layout{
+    grid-template-columns: 1fr;
+  }
+  .sidebar{
+    position: fixed;
+    inset: 76px auto 16px 16px;
+    width: min(360px, calc(100vw - 32px));
+    max-height: calc(100vh - 92px);
+    overflow: auto;
+    z-index: 50;
+    transform: translateX(-110%);
+    transition: transform .16s ease;
+  }
+  body.tocOpen .sidebar{
+    transform: translateX(0%);
+  }
+  .tocBackdrop{
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,.25);
+    backdrop-filter: blur(2px);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .16s ease;
+  }
+  body.tocOpen .tocBackdrop{
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .tocBtn{
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.72));
+    box-shadow: 0 10px 24px rgba(15,23,42,.08);
+    padding: 10px 12px;
+    border-radius: 999px;
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 780;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+  .tocBtn:hover{ filter: brightness(1.02); }
+  .tocBtn:active{ transform: translateY(1px); }
+  .tocBtn .icon{ font-weight: 900; color: var(--muted2); }
+  @media (max-width: 520px){
+    .sidebar{ inset: 66px 10px 10px 10px; width: auto; }
+  }
+
+
+
+  /* Appendix readability: clearer nesting and category separation */
+  .appendix .details{
+    margin-top: 12px;
+    background: rgba(255,255,255,.82);
+  }
+  .appendix > .details{
+    border: 1px solid rgba(15,23,42,.12);
+    box-shadow: 0 10px 22px rgba(15,23,42,.06);
+  }
+  .appendix > .details > summary{
+    font-size: 14px;
+    font-weight: 860;
+    padding: 14px 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.80));
+  }
+  .appendix .details .details{
+    margin-top: 10px;
+    border: 1px solid rgba(15,23,42,.10);
+    background: rgba(255,255,255,.88);
+  }
+  /* Indentation by nesting depth */
+  .appendix .details .details{ margin-left: 10px; }
+  .appendix .details .details .details{ margin-left: 20px; }
+  .appendix .details .details > summary{
+    font-size: 13px;
+    font-weight: 820;
+    padding: 12px 12px;
+    background: rgba(47,111,237,.04);
+    border-left: 3px solid rgba(47,111,237,.35);
+  }
+  .appendix .details .details[open] > summary{
+    background: rgba(47,111,237,.06);
+  }
+  .appendix .details .details > :not(summary){
+    padding-left: 6px;
+  }
+  /* Make vocab rows easier to scan */
+  .appendix .vocabBlock{ margin-top: 12px; }
+  .appendix .vocabLine:nth-child(odd){ background: rgba(15,23,42,.02); }
+  .appendix .vocabLine:hover{ background: rgba(47,111,237,.04); }
+  /* Add subtle column labels for vocab blocks */
+  .vocabHeader{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr 1.1fr 1.3fr;
+    gap: 10px;
+    padding: 10px 12px;
+    color: var(--muted2);
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(15,23,42,.06);
+    background: rgba(255,255,255,.90);
+  }
+  @media (max-width: 980px){
+    .vocabHeader{ grid-template-columns: 1fr; }
+  }
+
+
+  /* Responsive */
+  @media (max-width: 980px){
+    .layout{ grid-template-columns: 1fr; }
+    /* sidebar uses drawer; no sticky */
+    .vocabLine{ grid-template-columns: 1fr; }
+  }
+  @media print {
+    body{ background:#fff; }
+    .sidebar{ display:none; }
+    .layout{ grid-template-columns: 1fr; }
+    .content, .sidebar{ box-shadow:none; }
+    a{ color:#000; text-decoration:underline; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="tocBackdrop" id="tocBackdrop" aria-hidden="true"></div>
+
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brandTitle">Japan Survival Study Guide</div>
+    <div class="brandSub">Travel-first learning plan built around your decks and practical interactions</div>
+  </div>
+  <div style="display:flex; gap:10px; align-items:center;"><button class="tocBtn" id="tocBtn" type="button"><span class="icon">☰</span>Contents</button><div class="pill">Single-file • Printable • Offline-ready</div></div>
+</header>
+<div class="layout"><aside class="sidebar"><div class="sidebarInner"><div class="tocTitle">Table of Contents</div><nav class="toc"><a class="tocLink" href="#part0">Part 0 — How to Use Your Tools Together</a>
+<a class="tocLink" href="#part1">Part 1 — Core Survival Layer (Politeness + Rescue Phrases)</a>
+<a class="tocLink" href="#part2">Part 2 — Ordering Food (High-Impact Templates)</a>
+<a class="tocLink" href="#part3">Part 3 — Ordering Coffee (Fast, Small Transactions)</a>
+<a class="tocLink" href="#part4">Part 4 — Hotels (Check-in → Room Issues → Checkout)</a>
+<a class="tocLink" href="#part5">Part 5 — Transportation (Stations, Trains, and Getting Unstuck)</a>
+<a class="tocLink" href="#part6">Part 6 — Convenience Store / Daily Errands (Konbini Mastery)</a>
+<a class="tocLink" href="#part7">Part 7 — Grammar Basics in Parallel (Use-First, Travel-Relevant)</a>
+<a class="tocLink" href="#part8">Part 8 — Scripts Roadmap (Hiragana → Katakana → Practical Kanji)</a>
+<a class="tocLink" href="#appendix">Appendix — Full Vocabulary Reference (from your Flashcard App)</a></nav><div class="sidebarNote">Tip: use this guide for context and templates; use the Flashcard App for memorization.</div></div></aside><main class="content"><section class="section" id="part0"><h2>Part 0 — How to Use Your Tools Together</h2>
+<p class="lede">This guide is designed to work alongside <a href="https://nthomas734.github.io/Japanese-Learning-Apps/japanese-flash-cards.html?v=latest" target="_blank" rel="noopener noreferrer">Flashcard App</a>, <a href="https://apps.apple.com/us/app/airlearn-language-learning/id6479639235" target="_blank" rel="noopener noreferrer">AirLearn</a>, and <a href="https://apps.apple.com/us/app/learn-a-language-pingo-ai/id6738882620" target="_blank" rel="noopener noreferrer">Pingo AI</a>. Your objective is to learn Japanese in the most useful order for real travel conversations: short, correct phrases first; grammar and reading layered in parallel.</p>
+
+<div class="callout">
+      <div class="calloutTitle">Your learning priorities (in order)</div>
+      <div class="calloutBody"><ul><li>Essential survival phrases that make you polite and functional immediately.</li><li>High-frequency travel interactions: ordering food (priority), coffee, hotels, daily errands, transportation.</li><li>Basic grammar and sentence structure in parallel so you can combine what you know.</li><li>Scripts roadmap: Hiragana → Katakana → practical Kanji recognition for your use cases.</li></ul></div>
+    </div>
+
+<h3>What each tool is for</h3>
+<ul><li><strong>Flashcard App</strong>: memorization and automatic recall. Target: you can say it without thinking.</li><li><strong>AirLearn</strong>: daily spaced exposure and listening reps. Target: you recognize it instantly.</li><li><strong>Pingo AI</strong>: roleplays for speaking practice. Target: you can produce the phrase under pressure.</li></ul>
+
+<h3>Weekly cadence (simple, sustainable)</h3>
+<ul><li>5–6 days on, 1 day review.</li><li>Daily: 10–20 minutes flashcards + 5–10 minutes roleplay.</li><li>Each week: add a small amount of new material (10–20 phrases), then reuse it in roleplays.</li><li>Keep a running ‘Active Phrases’ list: the 30–60 phrases you are currently trying to make automatic.</li></ul>
+</section><section class="section" id="part1"><h2>Part 1 — Core Survival Layer (Politeness + Rescue Phrases)</h2>
+<p>This is the most important layer. These phrases prevent small problems from becoming friction, and they signal politeness even when your grammar is imperfect.</p>
+
+<h3>Why this layer matters</h3>
+<ul><li>Politeness often matters more than grammatical accuracy.</li><li>A single correct phrase can smooth an entire interaction.</li><li>These phrases buy time when you’re confused and keep the tone positive.</li></ul>
+
+<h3>Core phrases (memorize first)</h3>
+<div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Excuse me / Sorry</span><span class="jp">すみません</span><span class="ro">Sumimasen</span><span class="pr">soo-mee-mah-sen</span></div><div class="vocabLine"><span class="en">Thank you very much</span><span class="jp">ありがとうございます</span><span class="ro">Arigatō gozaimasu</span><span class="pr">ah-ree-gah-toh goh-zah-ee-mas</span></div><div class="vocabLine"><span class="en">Please (requesting an item)</span><span class="jp">ください</span><span class="ro">Kudasai</span><span class="pr">koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Please (general favor)</span><span class="jp">お願いします</span><span class="ro">Onegaishimasu</span><span class="pr">oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">No thank you / I&#x27;m good</span><span class="jp">大丈夫です</span><span class="ro">Daijōbu desu</span><span class="pr">dye-joh-bu dess</span></div><div class="vocabLine"><span class="en">I am ~</span><span class="jp">私は〜です</span><span class="ro">Watashi wa ~ desu</span><span class="pr">wah-tah-shee wah ~ dess</span></div><div class="vocabLine"><span class="en">I don’t understand</span><span class="jp">わかりません</span><span class="ro">Wakarimasen</span><span class="pr">wah-kah-ree-mah-sen</span></div></div>
+
+<h3>Sentence patterns to internalize</h3>
+<ul><li><strong>すみません + ___</strong> (polite opener).</li><li><strong>___ をください</strong> (requesting items).</li><li><strong>___ をお願いします</strong> (requesting actions/selections).</li></ul>
+
+<h3>Pingo AI practice (copy/paste prompts)</h3>
+<div class="prompts">
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 1 — Basic polite interaction</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a store clerk in Japan. I am a beginner. Please greet me, ask what I want, and speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 2 — Not understanding</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a Japanese speaker giving directions. Speak naturally. If I don’t understand, I will say I don’t understand.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 3 — Declining politely</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a cashier offering bags and extras. Ask me questions like a convenience store clerk.</pre>
+    </div>
+</div>
+
+<h3>Offline homework (daily)</h3>
+<ul><li>Say each core phrase out loud slowly, then at natural speed.</li><li>Practice: すみません (<span class="mono">sumimasen</span>; <span class="mono">soo-mee-mah-sen</span>) → request → ありがとうございます (<span class="mono">arigatō gozaimasu</span>; <span class="mono">ah-ree-gah-toh goh-zah-ee-mas</span>).</li><li>Pretend you are ordering water, declining a bag, or asking for help.</li></ul>
+<p class="miniNote">Focus on confidence and rhythm, not perfection.</p>
+</section><section class="section" id="part2"><h2>Part 2 — Ordering Food (High-Impact Templates)</h2>
+<p>Restaurants are template-driven. You can succeed with a small toolkit: getting attention politely, ordering with a template, handling one follow-up question, and asking for the check.</p>
+
+<h3>Typical restaurant flow</h3>
+<ol><li>Get attention politely (すみません (<span class="mono">sumimasen</span>; <span class="mono">soo-mee-mah-sen</span>)).</li><li>Order using a template (これをお願いします (<span class="mono">kore o onegaishimasu</span>; <span class="mono">koh-reh oh oh-neh-guy-shee-mas</span>) / ___をください (<span class="mono">___ o kudasai</span>; <span class="mono">___ oh koo-dah-sigh</span>)).</li><li>Handle simple follow-ups (set vs single, size, drink).</li><li>Close politely (ありがとうございます (<span class="mono">arigatō gozaimasu</span>; <span class="mono">ah-ree-gah-toh goh-zah-ee-mas</span>)).</li></ol>
+
+<h3>Sentence templates to internalize</h3>
+<div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">This, please.</span><span class="jp">これをお願いします</span><span class="ro">kore o onegaishimasu</span><span class="pr">koh-reh oh oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">___ please.</span><span class="jp">___をください</span><span class="ro">___ o kudasai</span><span class="pr">___ oh koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Water, please.</span><span class="jp">お水ください</span><span class="ro">omizu kudasai</span><span class="pr">oh-mee-zoo koo-dah-sigh</span></div><div class="vocabLine"><span class="en">The check, please.</span><span class="jp">お会計お願いします</span><span class="ro">okaikei onegaishimasu</span><span class="pr">oh-kai-kay oh-neh-guy-shee-mas</span></div></div>
+
+<details class="details" ><summary>Vocabulary from your decks (Ordering + Essentials)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Welcome!</span><span class="jp">いらっしゃいませ</span><span class="ro">Irasshaimase</span><span class="pr">ee-rah-sshah-ee-mah-seh</span></div><div class="vocabLine"><span class="en">Table for one</span><span class="jp">一人です</span><span class="ro">Hitori desu</span><span class="pr">hee-toh-ree dess</span></div><div class="vocabLine"><span class="en">Table for two</span><span class="jp">二人です</span><span class="ro">Futari desu</span><span class="pr">foo-tah-ree dess</span></div><div class="vocabLine"><span class="en">Table for three</span><span class="jp">三人です</span><span class="ro">Sannin desu</span><span class="pr">sahn-neen dess</span></div><div class="vocabLine"><span class="en">Table for four</span><span class="jp">四人です</span><span class="ro">Yonin desu</span><span class="pr">yoh-neen dess</span></div><div class="vocabLine"><span class="en">I’d like to order this</span><span class="jp">これをお願いします</span><span class="ro">Kore o onegaishimasu</span><span class="pr">koh-reh oh oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">One please</span><span class="jp">一つください</span><span class="ro">Hitotsu kudasai</span><span class="pr">hee-toh-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Two please</span><span class="jp">二つください</span><span class="ro">Futatsu kudasai</span><span class="pr">foo-tah-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Three please</span><span class="jp">三つください</span><span class="ro">Mittsu kudasai</span><span class="pr">meet-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Four please</span><span class="jp">四つください</span><span class="ro">Yottsu kudasai</span><span class="pr">yoht-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Water, please</span><span class="jp">お水ください</span><span class="ro">Omizu kudasai</span><span class="pr">oh-mee-zoo koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Another beer, please</span><span class="jp">ビールもう一杯</span><span class="ro">Bīru mō ippai</span><span class="pr">bee-roo moh ee-pie</span></div><div class="vocabLine"><span class="en">Check, please</span><span class="jp">お会計お願いします</span><span class="ro">Okaikei onegaishimasu</span><span class="pr">oh-kai-kay oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">It’s delicious</span><span class="jp">おいしいです</span><span class="ro">Oishii desu</span><span class="pr">oh-ee-shee dess</span></div><div class="vocabLine"><span class="en">How many people?</span><span class="jp">何名様ですか？</span><span class="ro">Nan-mei sama desu ka?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">What would you like to order?</span><span class="jp">ご注文は？</span><span class="ro">Go-chūmon wa?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">This way, please.</span><span class="jp">こちらへどうぞ</span><span class="ro">Kochira e dōzo</span><span class="pr"></span></div><div class="vocabLine"><span class="en">Can I place an order?</span><span class="jp">注文お願いします</span><span class="ro">Chūmon onegaishimasu</span><span class="pr">choo-mohn oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Water please</span><span class="jp">水をお願いします</span><span class="ro">Mizu o onegaishimasu</span><span class="pr">mee-zoo oh oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Can I get the check / bill please</span><span class="jp">お会計お願いします</span><span class="ro">Okaikei onegaishimasu</span><span class="pr">oh-kai-kay oh-neh-guy-shee-mas</span></div></div></details>
+
+<h3>Pingo AI practice (copy/paste prompts)</h3>
+<div class="prompts">
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 1 — Full ordering flow</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a waiter at a casual restaurant in Japan. Please greet me, ask how many people, then let me order. Speak slowly and ask one follow-up question after I order.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 2 — Handling follow-ups</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a waiter. Ask me if I want a set or single item, and ask if I want a drink. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 3 — Asking for the check</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a waiter. After I finish, I want to ask for the check. Prompt me naturally.</pre>
+    </div>
+</div>
+
+<h3>Offline homework</h3>
+<ul><li>Say ordering phrases out loud while pointing at an imaginary menu.</li><li>Practice switching between: これをお願いします / お水ください / お会計お願いします.</li><li>Practice a smooth loop: すみません → これをお願いします → ありがとうございます.</li></ul>
+</section><section class="section" id="part3"><h2>Part 3 — Ordering Coffee (Fast, Small Transactions)</h2>
+<p>Coffee ordering is fast-paced. Your goal is to be concise, confirm hot/iced and size, and not freeze when asked follow-ups.</p>
+
+<h3>Typical coffee flow</h3>
+<ol><li>Order the drink (short and clear).</li><li>Answer: hot/iced, size, for here/to go.</li><li>Pay and close politely (ありがとうございます (<span class="mono">arigatō gozaimasu</span>; <span class="mono">ah-ree-gah-toh goh-zah-ee-mas</span>)).</li></ol>
+
+<details class="details" ><summary>Vocabulary from your decks (Ordering + Essentials)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Coffee please</span><span class="jp">コーヒーください</span><span class="ro">Kōhī kudasai</span><span class="pr">koh-hee koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Hot or iced?</span><span class="jp">ホットですか、アイスですか</span><span class="ro">Hotto desu ka, aisu desu ka</span><span class="pr">hoht-to dess kah, eye-soo dess kah</span></div><div class="vocabLine"><span class="en">I’ll have this</span><span class="jp">これにします</span><span class="ro">Kore ni shimasu</span><span class="pr">koh-reh nee shee-mas</span></div><div class="vocabLine"><span class="en">For here</span><span class="jp">店内で</span><span class="ro">Tennai de</span><span class="pr">ten-nye deh</span></div><div class="vocabLine"><span class="en">To go</span><span class="jp">持ち帰りで</span><span class="ro">Mochikaeri de</span><span class="pr">moh-chee-kye-ree deh</span></div><div class="vocabLine"><span class="en">For here?</span><span class="jp">店内ですか？</span><span class="ro">Tennai desu ka?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">To go?</span><span class="jp">お持ち帰りですか？</span><span class="ro">Omochikaeri desu ka?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">Credit card OK?</span><span class="jp">カードは使えますか</span><span class="ro">Kādo wa tsukaemasu ka</span><span class="pr">kah-doh wah tsoo-kai-mahs kah</span></div></div></details>
+
+<h3>Pingo AI practice (copy/paste prompts)</h3>
+<div class="prompts">
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 1 — Coffee order with follow-ups</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a barista in Japan. Ask what I want, then ask one follow-up question (hot/iced or size). Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 2 — For here or to go</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a barista. Ask if it’s for here or to go, then ask if I’m paying by cash or card. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 3 — Switching when sold out</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a barista. Tell me my first choice is sold out and ask what I want instead. Speak slowly.</pre>
+    </div>
+</div>
+
+<h3>Offline homework</h3>
+<ul><li>Practice a 15-second ‘coffee loop’: greeting → order → follow-up → thanks.</li><li>Say the same order three ways (slow / normal / slightly faster).</li></ul>
+</section><section class="section" id="part4"><h2>Part 4 — Hotels (Check-in → Room Issues → Checkout)</h2>
+<p>Hotel conversations are predictable and repeatable. You can pre-learn the sequence and feel confident: greeting → name/reservation → passport → key → breakfast/checkout time.</p>
+
+<h3>High-value hotel intentions</h3>
+<ul><li>Check-in smoothly and confirm your reservation.</li><li>Ask about checkout time and breakfast.</li><li>Handle a room issue politely (AC, towel, key).</li></ul>
+
+<details class="details" ><summary>Vocabulary from your decks (Travel + Essentials)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Reservation / appointment</span><span class="jp">よやく</span><span class="ro">Yoyaku</span><span class="pr">yoh-yah-koo</span></div><div class="vocabLine"><span class="en">My name is ___</span><span class="jp">名前は___です</span><span class="ro">Namae wa ___ desu</span><span class="pr">nah-mah-eh wah ___ dess</span></div><div class="vocabLine"><span class="en">Check-in, please</span><span class="jp">チェックインお願いします</span><span class="ro">Chekku-in onegaishimasu</span><span class="pr">chek-koo-in oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">What time is check-out?</span><span class="jp">チェックアウトは何時ですか？</span><span class="ro">Chekku-auto wa nan-ji desu ka?</span><span class="pr">chek-koo-out-oh wah nahn-jee dess kah</span></div><div class="vocabLine"><span class="en">What time is breakfast?</span><span class="jp">朝食は何時ですか？</span><span class="ro">Chōshoku wa nan-ji desu ka?</span><span class="pr">choh-shoh-koo wah nahn-jee dess kah</span></div></div></details>
+
+<h3>Pingo AI practice (copy/paste prompts)</h3>
+<div class="prompts">
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 1 — Check-in</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a hotel front desk agent in Japan. Please ask for my name and reservation. Speak slowly. If needed, ask for my passport.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 2 — Checkout time / breakfast</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a hotel front desk agent. After check-in, tell me the checkout time and ask if I have questions. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 3 — Room issue</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a hotel front desk agent. I will report a simple room problem (AC, towels, key). Ask clarifying questions and respond politely. Speak slowly.</pre>
+    </div>
+</div>
+
+<h3>Offline homework</h3>
+<ul><li>Practice saying: 名前は___です / チェックインお願いします / チェックアウトは何時ですか — slowly, then naturally.</li><li>Practice the ‘front desk loop’: すみません → request → ありがとうございます.</li></ul>
+</section><section class="section" id="part5"><h2>Part 5 — Transportation (Stations, Trains, and Getting Unstuck)</h2>
+<p>Even with maps, transportation is where real-time questions matter. The goal is to ask simple, correct questions about platforms, exits, and whether a train goes to your destination.</p>
+
+<h3>High-value transportation skills</h3>
+<ul><li>Ask where something is (platform, exit, line).</li><li>Ask whether this train goes to X.</li><li>Confirm direction and stop count (if needed).</li></ul>
+
+<details class="details" ><summary>Transportation vocabulary (Travel deck)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Where is the station?</span><span class="jp">駅はどこですか</span><span class="ro">Eki wa doko desu ka</span><span class="pr">eh-kee wah doh-koh dess kah</span></div><div class="vocabLine"><span class="en">Which line?</span><span class="jp">何線ですか</span><span class="ro">Nan-sen desu ka</span><span class="pr">nahn-sen dess kah</span></div><div class="vocabLine"><span class="en">Which platform?</span><span class="jp">何番線ですか</span><span class="ro">Nan-ban-sen desu ka</span><span class="pr">nahn-bahn-sen dess kah</span></div><div class="vocabLine"><span class="en">This train goes to ___?</span><span class="jp">この電車は___に行きますか</span><span class="ro">Kono densha wa ___ ni ikimasu ka</span><span class="pr">koh-no den-shah wah ___ nee ee-kee-mas kah</span></div><div class="vocabLine"><span class="en">One ticket please</span><span class="jp">切符一枚ください</span><span class="ro">Kippu ichimai kudasai</span><span class="pr">kee-poo ee-chee-my koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Where is the exit?</span><span class="jp">出口はどこですか</span><span class="ro">Deguchi wa doko desu ka</span><span class="pr">deh-goo-chee wah doh-koh dess kah</span></div><div class="vocabLine"><span class="en">Next stop is ___.</span><span class="jp">次は___です</span><span class="ro">Tsugi wa ___ desu</span><span class="pr"></span></div><div class="vocabLine"><span class="en">Transfer here.</span><span class="jp">乗り換えです</span><span class="ro">Norikae desu</span><span class="pr"></span></div></div></details>
+<details class="details" ><summary>Questions + Directions (Travel deck)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">What is this?</span><span class="jp">これは何ですか</span><span class="ro">Kore wa nan desu ka</span><span class="pr">koh-reh wah nahn dess kah</span></div><div class="vocabLine"><span class="en">What is your name?</span><span class="jp">名前はなんですか</span><span class="ro">Namae wa nan desu ka</span><span class="pr">nah-mah-eh wah nahn dess kah</span></div><div class="vocabLine"><span class="en">Where is the bathroom?</span><span class="jp">トイレはどこですか</span><span class="ro">Toire wa doko desu ka</span><span class="pr">toy-reh wah doh-koh dess kah</span></div></div></details>
+
+<h3>Pingo AI practice (copy/paste prompts)</h3>
+<div class="prompts">
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 1 — Finding the platform</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a station staff member in Japan. I am trying to find the right platform. Ask where I’m going, then give simple directions. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 2 — Does this train go to ___?</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a helpful commuter. I will ask if this train goes to my destination. Answer and add one helpful detail. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 3 — Exit navigation</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are station staff. I need a specific exit. Ask a clarifying question and then direct me. Speak slowly.</pre>
+    </div>
+</div>
+
+<h3>Offline homework</h3>
+<ul><li>Practice すみません + destination + question.</li><li>Practice repeating your destination clearly (station names and neighborhoods).</li></ul>
+</section><section class="section" id="part6"><h2>Part 6 — Convenience Store / Daily Errands (Konbini Mastery)</h2>
+<p>Konbini interactions are short and frequent. Mastering them gives you daily confidence: bags, payment, simple requests, and polite closings.</p>
+
+<h3>High-value konbini intentions</h3>
+<ul><li>Answer bag / receipt questions politely.</li><li>Pay smoothly (cash/card).</li><li>Make tiny requests (fork, heating, etc.) if relevant to your deck.</li></ul>
+
+<details class="details" ><summary>Vocabulary from your decks (Travel + Essentials)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Convenience store</span><span class="jp">コンビニ</span><span class="ro">konbini</span><span class="pr">kohn-bee-nee</span></div><div class="vocabLine"><span class="en">Cash register / checkout</span><span class="jp">レジ</span><span class="ro">reji</span><span class="pr">reh-jee</span></div><div class="vocabLine"><span class="en">Receipt</span><span class="jp">レシート</span><span class="ro">reshiito</span><span class="pr">reh-shee-toh</span></div><div class="vocabLine"><span class="en">Plastic bag</span><span class="jp">レジ袋</span><span class="ro">reji-bukuro</span><span class="pr">reh-jee boo-koo-roh</span></div><div class="vocabLine"><span class="en">Do you need a bag?</span><span class="jp">袋はいりますか？</span><span class="ro">Fukuro wa irimasu ka?</span><span class="pr">foo-koo-roh wah ee-ree-mas ka</span></div><div class="vocabLine"><span class="en">No, I&#x27;m okay.</span><span class="jp">大丈夫です</span><span class="ro">Daijōbu desu</span><span class="pr">dai-joh-boo des</span></div><div class="vocabLine"><span class="en">Please.</span><span class="jp">お願いします</span><span class="ro">Onegaishimasu</span><span class="pr">oh-neh-gai-shee-mas</span></div><div class="vocabLine"><span class="en">Just looking.</span><span class="jp">見ているだけです</span><span class="ro">Mite iru dake desu</span><span class="pr">mee-teh ee-roo dah-keh des</span></div><div class="vocabLine"><span class="en">This one, please.</span><span class="jp">これをお願いします</span><span class="ro">Kore o onegaishimasu</span><span class="pr">koh-reh oh oh-neh-gai-shee-mas</span></div><div class="vocabLine"><span class="en">Cash</span><span class="jp">現金</span><span class="ro">genkin</span><span class="pr">gen-keen</span></div><div class="vocabLine"><span class="en">Credit card</span><span class="jp">クレジットカード</span><span class="ro">kurejitto kādo</span><span class="pr">koo-reh-jit-toh kah-doh</span></div><div class="vocabLine"><span class="en">IC card (Suica/PASMO)</span><span class="jp">ICカード</span><span class="ro">aishi kādo</span><span class="pr">ai-shee kah-doh</span></div><div class="vocabLine"><span class="en">Touchless / tap</span><span class="jp">タッチ決済</span><span class="ro">tacchi kessai</span><span class="pr">tah-chee keh-ssai</span></div><div class="vocabLine"><span class="en">Change (money)</span><span class="jp">お釣り</span><span class="ro">otsuri</span><span class="pr">oh-tsoo-ree</span></div><div class="vocabLine"><span class="en">Coin</span><span class="jp">硬貨</span><span class="ro">kōka</span><span class="pr">koh-kah</span></div><div class="vocabLine"><span class="en">Bill (banknote)</span><span class="jp">紙幣</span><span class="ro">shihei</span><span class="pr">shee-heh</span></div><div class="vocabLine"><span class="en">ATM</span><span class="jp">ATM</span><span class="ro">ētīemu</span><span class="pr">ay-tee-ee-em</span></div><div class="vocabLine"><span class="en">Withdrawal</span><span class="jp">引き出し</span><span class="ro">hikidashi</span><span class="pr">hee-kee-dah-shee</span></div><div class="vocabLine"><span class="en">Deposit</span><span class="jp">預け入れ</span><span class="ro">azukeire</span><span class="pr">ah-zoo-keh-ee-reh</span></div><div class="vocabLine"><span class="en">Top up / charge (IC card)</span><span class="jp">チャージ</span><span class="ro">chāji</span><span class="pr">chah-jee</span></div><div class="vocabLine"><span class="en">Wi‑Fi</span><span class="jp">Wi‑Fi</span><span class="ro">waifai</span><span class="pr">why-fye</span></div><div class="vocabLine"><span class="en">Battery</span><span class="jp">電池</span><span class="ro">denchi</span><span class="pr">den-chee</span></div><div class="vocabLine"><span class="en">Charger</span><span class="jp">充電器</span><span class="ro">jūdenki</span><span class="pr">joo-den-kee</span></div><div class="vocabLine"><span class="en">Umbrella</span><span class="jp">傘</span><span class="ro">kasa</span><span class="pr">kah-sah</span></div><div class="vocabLine"><span class="en">Tissue</span><span class="jp">ティッシュ</span><span class="ro">tisshu</span><span class="pr">tee-shoo</span></div><div class="vocabLine"><span class="en">Hand sanitizer</span><span class="jp">消毒液</span><span class="ro">shōdokueki</span><span class="pr">shoh-doh-koo-eh-kee</span></div><div class="vocabLine"><span class="en">Toilet</span><span class="jp">トイレ</span><span class="ro">toire</span><span class="pr">toy-reh</span></div><div class="vocabLine"><span class="en">Restroom?</span><span class="jp">トイレはどこですか？</span><span class="ro">Toire wa doko desu ka?</span><span class="pr">toy-reh wah doh-koh des ka</span></div><div class="vocabLine"><span class="en">Open 24 hours</span><span class="jp">24時間営業</span><span class="ro">nijūyojikan eigyō</span><span class="pr">nee-joo-yoh-jee-kahn eh-gyoh</span></div><div class="vocabLine"><span class="en">Discount / sale</span><span class="jp">割引</span><span class="ro">waribiki</span><span class="pr">wah-ree-bee-kee</span></div></div></details>
+
+<h3>Pingo AI practice (copy/paste prompts)</h3>
+<div class="prompts">
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 1 — Konbini checkout</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a convenience store cashier in Japan. Ask if I want a bag and if I’m paying by cash or card. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 2 — Small request</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a convenience store cashier. I will make a small request (receipt, bag, heating, utensils). Ask one clarifying question. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 3 — Polite close</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a cashier. After payment, end the interaction politely. I will respond politely. Speak slowly.</pre>
+    </div>
+</div>
+
+<h3>Offline homework</h3>
+<ul><li>Practice: 大丈夫です (no thanks) in a calm, friendly tone.</li><li>Practice: ありがとうございます as a clean closer after paying.</li></ul>
+</section><section class="section" id="part7"><h2>Part 7 — Grammar Basics in Parallel (Use-First, Travel-Relevant)</h2>
+<p>Grammar here is not academic. It is a tool for combining what you already know. Learn a few particles and apply them immediately to your travel templates.</p>
+
+<h3>Particles (focus on these first)</h3>
+<details class="details" ><summary>Particle list (from your Grammar set)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Topic marker (wa)</span><span class="jp">は</span><span class="ro">wa</span><span class="pr">wa</span></div><div class="vocabLine"><span class="en">Object marker (o)</span><span class="jp">を</span><span class="ro">o</span><span class="pr">o</span></div><div class="vocabLine"><span class="en">Question marker (ka)</span><span class="jp">か</span><span class="ro">ka</span><span class="pr">ka</span></div><div class="vocabLine"><span class="en">Destination / time (ni)</span><span class="jp">に</span><span class="ro">ni</span><span class="pr">ni</span></div><div class="vocabLine"><span class="en">Location of action (de)</span><span class="jp">で</span><span class="ro">de</span><span class="pr">de</span></div></div></details>
+
+<h3>Counters (high utility)</h3>
+<p class="miniNote">Counters matter when ordering, buying, or asking “how many.” Learn a handful and reuse them repeatedly.</p>
+<details class="details" ><summary>Counter list (from your Grammar set)</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">General counter (1–9): 1</span><span class="jp">一つ/1つ</span><span class="ro">hitotsu</span><span class="pr">hitotsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 2</span><span class="jp">二つ/2つ</span><span class="ro">futatsu</span><span class="pr">futatsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 3</span><span class="jp">三つ/3つ</span><span class="ro">mittsu</span><span class="pr">mittsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 4</span><span class="jp">四つ/4つ</span><span class="ro">yottsu</span><span class="pr">yottsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 5</span><span class="jp">五つ/5つ</span><span class="ro">itsutsu</span><span class="pr">itsutsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 6</span><span class="jp">六つ/6つ</span><span class="ro">muttsu</span><span class="pr">muttsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 7</span><span class="jp">七つ/7つ</span><span class="ro">nanatsu</span><span class="pr">nanatsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 8</span><span class="jp">八つ/8つ</span><span class="ro">yattsu</span><span class="pr">yattsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 9</span><span class="jp">九つ/9つ</span><span class="ro">kokonotsu</span><span class="pr">kokonotsu</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 1</span><span class="jp">一個</span><span class="ro">ikko</span><span class="pr">ikko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 6</span><span class="jp">六個</span><span class="ro">rokko</span><span class="pr">rokko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 8</span><span class="jp">八個</span><span class="ro">hakko</span><span class="pr">hakko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 10</span><span class="jp">十個</span><span class="ro">jukko</span><span class="pr">jukko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 100</span><span class="jp">百個</span><span class="ro">hyakko</span><span class="pr">hyakko</span></div><div class="vocabLine"><span class="en">People counter: 1 person</span><span class="jp">一人</span><span class="ro">hitori</span><span class="pr">hitori</span></div><div class="vocabLine"><span class="en">People counter: 2 people</span><span class="jp">二人</span><span class="ro">futari</span><span class="pr">futari</span></div><div class="vocabLine"><span class="en">People counter (suffix)</span><span class="jp">人</span><span class="ro">nin</span><span class="pr">nin</span></div><div class="vocabLine"><span class="en">Flat objects counter</span><span class="jp">枚</span><span class="ro">mai</span><span class="pr">mai</span></div><div class="vocabLine"><span class="en">Long/cylindrical objects counter</span><span class="jp">本</span><span class="ro">hon</span><span class="pr">hon</span></div><div class="vocabLine"><span class="en">Books/notebooks counter</span><span class="jp">冊</span><span class="ro">satsu</span><span class="pr">satsu</span></div><div class="vocabLine"><span class="en">Machines/vehicles/furniture counter</span><span class="jp">台</span><span class="ro">dai</span><span class="pr">dai</span></div><div class="vocabLine"><span class="en">Small animals/insects/fish counter</span><span class="jp">匹</span><span class="ro">hiki</span><span class="pr">hiki</span></div><div class="vocabLine"><span class="en">Large animals counter</span><span class="jp">頭</span><span class="ro">tō</span><span class="pr">toh</span></div><div class="vocabLine"><span class="en">Birds/rabbits counter</span><span class="jp">羽</span><span class="ro">wa</span><span class="pr">wa</span></div><div class="vocabLine"><span class="en">Number of times counter</span><span class="jp">回</span><span class="ro">kai</span><span class="pr">kai</span></div><div class="vocabLine"><span class="en">Minutes counter</span><span class="jp">分</span><span class="ro">fun</span><span class="pr">fun</span></div><div class="vocabLine"><span class="en">Age counter</span><span class="jp">歳</span><span class="ro">sai</span><span class="pr">sai</span></div><div class="vocabLine"><span class="en">Age: 20 years old</span><span class="jp">二十歳</span><span class="ro">hatachi</span><span class="pr">hatachi</span></div></div></details>
+
+<h3>Practice plan</h3>
+<ul><li>Pick 1–2 particles for the week (e.g., を, は/が, に).</li><li>Write 10 tiny sentences using travel nouns you already know.</li><li>Use those same sentences in Pingo roleplays so grammar becomes automatic.</li></ul>
+
+<h3>Pingo AI practice (copy/paste prompts)</h3>
+<div class="prompts">
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 1 — Particle practice with corrections</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a Japanese tutor. I will say very short beginner sentences using basic particles. Please correct me gently and explain briefly. Speak slowly.</pre>
+    </div>
+<div class="prompt">
+      <div class="promptTop">
+        <div class="promptTitle">Prompt 2 — Restaurant sentences</div>
+        <div class="promptTag">Copy/paste into Pingo AI</div>
+      </div>
+      <pre class="promptBody">You are a tutor. Help me build 10 short restaurant sentences using を and ください/お願いします. Correct me if needed.</pre>
+    </div>
+</div>
+</section><section class="section" id="part8"><h2>Part 8 — Scripts Roadmap (Hiragana → Katakana → Practical Kanji)</h2>
+<p>You are already learning hiragana. Keep the progression focused on your travel use cases: recognition first, then speed, then confidence.</p>
+
+<h3>Hiragana</h3>
+<ul><li>Goal: instant recognition (no translating in your head).</li><li>Use your Flashcard App daily, plus short handwriting reps if helpful.</li></ul>
+
+<h3>Katakana</h3>
+<ul><li>Goal: read loanwords you will see constantly (menus, coffee, signs).</li><li>Treat katakana as ‘travel reading,’ not just an alphabet.</li></ul>
+
+<h3>Practical Kanji</h3>
+<ul><li>Goal: recognize common signage and menu words (not full literacy).</li><li>Start with the Kanji you encounter in your travel vocabulary and contexts.</li></ul>
+
+<details class="details" ><summary>If your decks include script lists, you can reference them here</summary><p class='miniNote'>Your flashcard file may include script decks for Hiragana/Katakana/Kanji. If you want them embedded into this study guide in a dedicated appendix, tell me and I will regenerate the file.</p></details>
+</section><section class="section" id="appendix"><h2>Appendix — Full Vocabulary Reference (from your Flashcard App)</h2>
+<p class="muted">Use this as a reference list. For memorization, rely on the Flashcard App’s review loop. This appendix is intentionally collapsible so the page stays readable.</p>
+<div class="appendix"><details class="details" ><summary>Essentials</summary><details class="details" ><summary>Essentials</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Excuse me / Sorry</span><span class="jp">すみません</span><span class="ro">Sumimasen</span><span class="pr">soo-mee-mah-sen</span></div><div class="vocabLine"><span class="en">Thank you very much</span><span class="jp">ありがとうございます</span><span class="ro">Arigatō gozaimasu</span><span class="pr">ah-ree-gah-toh goh-zah-ee-mas</span></div><div class="vocabLine"><span class="en">This</span><span class="jp">これ</span><span class="ro">Kore</span><span class="pr">koh-reh</span></div><div class="vocabLine"><span class="en">That (near you)</span><span class="jp">それ</span><span class="ro">Sore</span><span class="pr">soh-reh</span></div><div class="vocabLine"><span class="en">Please (requesting an item)</span><span class="jp">ください</span><span class="ro">Kudasai</span><span class="pr">koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Please (general favor)</span><span class="jp">お願いします</span><span class="ro">Onegaishimasu</span><span class="pr">oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">No thank you / I&#x27;m good</span><span class="jp">大丈夫です</span><span class="ro">Daijōbu desu</span><span class="pr">dye-joh-bu dess</span></div><div class="vocabLine"><span class="en">I am ~</span><span class="jp">私は〜です</span><span class="ro">Watashi wa ~ desu</span><span class="pr">wah-tah-shee wah ~ dess</span></div><div class="vocabLine"><span class="en">I don’t understand</span><span class="jp">わかりません</span><span class="ro">Wakarimasen</span><span class="pr">wah-kah-ree-mah-sen</span></div></div></details><details class="details" ><summary>Greetings</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Hello / Good afternoon</span><span class="jp">こんにちは</span><span class="ro">Konnichiwa</span><span class="pr">kon-nee-chee-wah</span></div><div class="vocabLine"><span class="en">Good morning</span><span class="jp">おはようございます</span><span class="ro">Ohayō gozaimasu</span><span class="pr">oh-hah-yoh goh-zah-ee-mas</span></div><div class="vocabLine"><span class="en">Good evening</span><span class="jp">こんばんは</span><span class="ro">Konbanwa</span><span class="pr">kon-bahn-wah</span></div><div class="vocabLine"><span class="en">Good night</span><span class="jp">おやすみ</span><span class="ro">Oyasumi</span><span class="pr">oh-yah-soo-mee</span></div></div></details><details class="details" ><summary>Restaurants</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Can I place an order?</span><span class="jp">注文お願いします</span><span class="ro">Chūmon onegaishimasu</span><span class="pr">choo-mohn oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Water please</span><span class="jp">水をお願いします</span><span class="ro">Mizu o onegaishimasu</span><span class="pr">mee-zoo oh oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Can I get the check / bill please</span><span class="jp">お会計お願いします</span><span class="ro">Okaikei onegaishimasu</span><span class="pr">oh-kai-kay oh-neh-guy-shee-mas</span></div></div></details></details><details class="details" ><summary>Travel</summary><details class="details" ><summary>Restaurants</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">One more beer</span><span class="jp">ビールもう一杯</span><span class="ro">Bīru mō ippai</span><span class="pr">bee-roo moh ee-pie</span></div><div class="vocabLine"><span class="en">Reservation</span><span class="jp">よやく</span><span class="ro">Yoyaku</span><span class="pr">yoh-yah-koo</span></div></div></details><details class="details" ><summary>Shopping</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Do you have (it)?</span><span class="jp">ありますか</span><span class="ro">Arimasu ka</span><span class="pr">ah-ree-mas kah</span></div><div class="vocabLine"><span class="en">How much?</span><span class="jp">いくら</span><span class="ro">Ikura</span><span class="pr">ee-koo-rah</span></div><div class="vocabLine"><span class="en">Please show me</span><span class="jp">見せてください</span><span class="ro">Misete kudasai</span><span class="pr">mee-seh-teh koo-dah-sigh</span></div></div></details><details class="details" ><summary>Questions</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">What is this?</span><span class="jp">これは何ですか</span><span class="ro">Kore wa nan desu ka</span><span class="pr">koh-reh wah nahn dess kah</span></div><div class="vocabLine"><span class="en">What is your name?</span><span class="jp">名前はなんですか</span><span class="ro">Namae wa nan desu ka</span><span class="pr">nah-mah-eh wah nahn dess kah</span></div></div></details><details class="details" ><summary>Directions</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Where is the bathroom?</span><span class="jp">トイレはどこですか</span><span class="ro">Toire wa doko desu ka</span><span class="pr">toy-reh wah doh-koh dess kah</span></div></div></details><details class="details" ><summary>Communication</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">I can’t speak Japanese</span><span class="jp">日本語を話せません</span><span class="ro">Nihongo o hanasemasen</span><span class="pr">nee-hohn-goh oh hah-nah-seh-mah-sen</span></div><div class="vocabLine"><span class="en">I am practicing my Japanese</span><span class="jp">私は日本語を練習しています。</span><span class="ro">Watashi wa nihongo o renshū shite imasu</span><span class="pr">wah-tah-shee wah nee-hohn-goh oh ren-shoo sheh-teh ee-mas</span></div></div></details><details class="details" ><summary>Hotel</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Reservation / appointment</span><span class="jp">よやく</span><span class="ro">Yoyaku</span><span class="pr">yoh-yah-koo</span></div><div class="vocabLine"><span class="en">My name is ___</span><span class="jp">名前は___です</span><span class="ro">Namae wa ___ desu</span><span class="pr">nah-mah-eh wah ___ dess</span></div><div class="vocabLine"><span class="en">Check-in, please</span><span class="jp">チェックインお願いします</span><span class="ro">Chekku-in onegaishimasu</span><span class="pr">chek-koo-in oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">What time is check-out?</span><span class="jp">チェックアウトは何時ですか？</span><span class="ro">Chekku-auto wa nan-ji desu ka?</span><span class="pr">chek-koo-out-oh wah nahn-jee dess kah</span></div><div class="vocabLine"><span class="en">What time is breakfast?</span><span class="jp">朝食は何時ですか？</span><span class="ro">Chōshoku wa nan-ji desu ka?</span><span class="pr">choh-shoh-koo wah nahn-jee dess kah</span></div></div></details><details class="details" ><summary>Numbers</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Hundred</span><span class="jp">ひゃく</span><span class="ro">Hyaku</span><span class="pr">hyah-koo</span></div><div class="vocabLine"><span class="en">Two hundred</span><span class="jp">にひゃく</span><span class="ro">Ni-hyaku</span><span class="pr">nee-hyah-koo</span></div><div class="vocabLine"><span class="en">Three hundred</span><span class="jp">さんびゃく</span><span class="ro">San-byaku</span><span class="pr">sahn-byah-koo</span></div><div class="vocabLine"><span class="en">Four hundred</span><span class="jp">よんひゃく</span><span class="ro">Yon-hyaku</span><span class="pr">yohn-hyah-koo</span></div><div class="vocabLine"><span class="en">Six hundred</span><span class="jp">ろっぴゃく</span><span class="ro">Roppyaku</span><span class="pr">roh-ppyah-koo</span></div><div class="vocabLine"><span class="en">Eight hundred</span><span class="jp">はっぴゃく</span><span class="ro">Happyaku</span><span class="pr">hah-ppyah-koo</span></div><div class="vocabLine"><span class="en">Twenty</span><span class="jp">にじゅう</span><span class="ro">Ni-jū</span><span class="pr">nee-joo</span></div><div class="vocabLine"><span class="en">Thirty</span><span class="jp">さんじゅう</span><span class="ro">San-jū</span><span class="pr">sahn-joo</span></div><div class="vocabLine"><span class="en">Four thousand</span><span class="jp">よんせん</span><span class="ro">Yon-sen</span><span class="pr">yohn-sen</span></div><div class="vocabLine"><span class="en">Three thousand</span><span class="jp">さんぜん</span><span class="ro">Sanzen</span><span class="pr">sahn-zen</span></div><div class="vocabLine"><span class="en">Eight thousand</span><span class="jp">はっせん</span><span class="ro">Hassen</span><span class="pr">hah-sen</span></div></div></details><details class="details" ><summary>Time &amp; Dates</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">From</span><span class="jp">から</span><span class="ro">Kara</span><span class="pr">kah-rah</span></div><div class="vocabLine"><span class="en">Until / to</span><span class="jp">まで</span><span class="ro">Made</span><span class="pr">mah-deh</span></div><div class="vocabLine"><span class="en">Morning / a.m.</span><span class="jp">ごぜん</span><span class="ro">Gozen</span><span class="pr">goh-zen</span></div><div class="vocabLine"><span class="en">Afternoon / p.m.</span><span class="jp">ごご</span><span class="ro">Gogo</span><span class="pr">goh-goh</span></div></div></details><details class="details" ><summary>Transportation</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Where is the station?</span><span class="jp">駅はどこですか</span><span class="ro">Eki wa doko desu ka</span><span class="pr">eh-kee wah doh-koh dess kah</span></div><div class="vocabLine"><span class="en">Which line?</span><span class="jp">何線ですか</span><span class="ro">Nan-sen desu ka</span><span class="pr">nahn-sen dess kah</span></div><div class="vocabLine"><span class="en">Which platform?</span><span class="jp">何番線ですか</span><span class="ro">Nan-ban-sen desu ka</span><span class="pr">nahn-bahn-sen dess kah</span></div><div class="vocabLine"><span class="en">This train goes to ___?</span><span class="jp">この電車は___に行きますか</span><span class="ro">Kono densha wa ___ ni ikimasu ka</span><span class="pr">koh-no den-shah wah ___ nee ee-kee-mas kah</span></div><div class="vocabLine"><span class="en">One ticket please</span><span class="jp">切符一枚ください</span><span class="ro">Kippu ichimai kudasai</span><span class="pr">kee-poo ee-chee-my koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Where is the exit?</span><span class="jp">出口はどこですか</span><span class="ro">Deguchi wa doko desu ka</span><span class="pr">deh-goo-chee wah doh-koh dess kah</span></div><div class="vocabLine"><span class="en">Next stop is ___.</span><span class="jp">次は___です</span><span class="ro">Tsugi wa ___ desu</span><span class="pr"></span></div><div class="vocabLine"><span class="en">Transfer here.</span><span class="jp">乗り換えです</span><span class="ro">Norikae desu</span><span class="pr"></span></div></div></details><details class="details" ><summary>Convenience Store / Daily Errands</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Convenience store</span><span class="jp">コンビニ</span><span class="ro">konbini</span><span class="pr">kohn-bee-nee</span></div><div class="vocabLine"><span class="en">Cash register / checkout</span><span class="jp">レジ</span><span class="ro">reji</span><span class="pr">reh-jee</span></div><div class="vocabLine"><span class="en">Receipt</span><span class="jp">レシート</span><span class="ro">reshiito</span><span class="pr">reh-shee-toh</span></div><div class="vocabLine"><span class="en">Plastic bag</span><span class="jp">レジ袋</span><span class="ro">reji-bukuro</span><span class="pr">reh-jee boo-koo-roh</span></div><div class="vocabLine"><span class="en">Do you need a bag?</span><span class="jp">袋はいりますか？</span><span class="ro">Fukuro wa irimasu ka?</span><span class="pr">foo-koo-roh wah ee-ree-mas ka</span></div><div class="vocabLine"><span class="en">No, I&#x27;m okay.</span><span class="jp">大丈夫です</span><span class="ro">Daijōbu desu</span><span class="pr">dai-joh-boo des</span></div><div class="vocabLine"><span class="en">Please.</span><span class="jp">お願いします</span><span class="ro">Onegaishimasu</span><span class="pr">oh-neh-gai-shee-mas</span></div><div class="vocabLine"><span class="en">Just looking.</span><span class="jp">見ているだけです</span><span class="ro">Mite iru dake desu</span><span class="pr">mee-teh ee-roo dah-keh des</span></div><div class="vocabLine"><span class="en">This one, please.</span><span class="jp">これをお願いします</span><span class="ro">Kore o onegaishimasu</span><span class="pr">koh-reh oh oh-neh-gai-shee-mas</span></div><div class="vocabLine"><span class="en">Cash</span><span class="jp">現金</span><span class="ro">genkin</span><span class="pr">gen-keen</span></div><div class="vocabLine"><span class="en">Credit card</span><span class="jp">クレジットカード</span><span class="ro">kurejitto kādo</span><span class="pr">koo-reh-jit-toh kah-doh</span></div><div class="vocabLine"><span class="en">IC card (Suica/PASMO)</span><span class="jp">ICカード</span><span class="ro">aishi kādo</span><span class="pr">ai-shee kah-doh</span></div><div class="vocabLine"><span class="en">Touchless / tap</span><span class="jp">タッチ決済</span><span class="ro">tacchi kessai</span><span class="pr">tah-chee keh-ssai</span></div><div class="vocabLine"><span class="en">Change (money)</span><span class="jp">お釣り</span><span class="ro">otsuri</span><span class="pr">oh-tsoo-ree</span></div><div class="vocabLine"><span class="en">Coin</span><span class="jp">硬貨</span><span class="ro">kōka</span><span class="pr">koh-kah</span></div><div class="vocabLine"><span class="en">Bill (banknote)</span><span class="jp">紙幣</span><span class="ro">shihei</span><span class="pr">shee-heh</span></div><div class="vocabLine"><span class="en">ATM</span><span class="jp">ATM</span><span class="ro">ētīemu</span><span class="pr">ay-tee-ee-em</span></div><div class="vocabLine"><span class="en">Withdrawal</span><span class="jp">引き出し</span><span class="ro">hikidashi</span><span class="pr">hee-kee-dah-shee</span></div><div class="vocabLine"><span class="en">Deposit</span><span class="jp">預け入れ</span><span class="ro">azukeire</span><span class="pr">ah-zoo-keh-ee-reh</span></div><div class="vocabLine"><span class="en">Top up / charge (IC card)</span><span class="jp">チャージ</span><span class="ro">chāji</span><span class="pr">chah-jee</span></div><div class="vocabLine"><span class="en">Wi‑Fi</span><span class="jp">Wi‑Fi</span><span class="ro">waifai</span><span class="pr">why-fye</span></div><div class="vocabLine"><span class="en">Battery</span><span class="jp">電池</span><span class="ro">denchi</span><span class="pr">den-chee</span></div><div class="vocabLine"><span class="en">Charger</span><span class="jp">充電器</span><span class="ro">jūdenki</span><span class="pr">joo-den-kee</span></div><div class="vocabLine"><span class="en">Umbrella</span><span class="jp">傘</span><span class="ro">kasa</span><span class="pr">kah-sah</span></div><div class="vocabLine"><span class="en">Tissue</span><span class="jp">ティッシュ</span><span class="ro">tisshu</span><span class="pr">tee-shoo</span></div><div class="vocabLine"><span class="en">Hand sanitizer</span><span class="jp">消毒液</span><span class="ro">shōdokueki</span><span class="pr">shoh-doh-koo-eh-kee</span></div><div class="vocabLine"><span class="en">Toilet</span><span class="jp">トイレ</span><span class="ro">toire</span><span class="pr">toy-reh</span></div><div class="vocabLine"><span class="en">Restroom?</span><span class="jp">トイレはどこですか？</span><span class="ro">Toire wa doko desu ka?</span><span class="pr">toy-reh wah doh-koh des ka</span></div><div class="vocabLine"><span class="en">Open 24 hours</span><span class="jp">24時間営業</span><span class="ro">nijūyojikan eigyō</span><span class="pr">nee-joo-yoh-jee-kahn eh-gyoh</span></div><div class="vocabLine"><span class="en">Discount / sale</span><span class="jp">割引</span><span class="ro">waribiki</span><span class="pr">wah-ree-bee-kee</span></div></div></details></details><details class="details" ><summary>Ordering</summary><details class="details" ><summary>Restaurants</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Welcome!</span><span class="jp">いらっしゃいませ</span><span class="ro">Irasshaimase</span><span class="pr">ee-rah-sshah-ee-mah-seh</span></div><div class="vocabLine"><span class="en">Table for one</span><span class="jp">一人です</span><span class="ro">Hitori desu</span><span class="pr">hee-toh-ree dess</span></div><div class="vocabLine"><span class="en">Table for two</span><span class="jp">二人です</span><span class="ro">Futari desu</span><span class="pr">foo-tah-ree dess</span></div><div class="vocabLine"><span class="en">Table for three</span><span class="jp">三人です</span><span class="ro">Sannin desu</span><span class="pr">sahn-neen dess</span></div><div class="vocabLine"><span class="en">Table for four</span><span class="jp">四人です</span><span class="ro">Yonin desu</span><span class="pr">yoh-neen dess</span></div><div class="vocabLine"><span class="en">I’d like to order this</span><span class="jp">これをお願いします</span><span class="ro">Kore o onegaishimasu</span><span class="pr">koh-reh oh oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">One please</span><span class="jp">一つください</span><span class="ro">Hitotsu kudasai</span><span class="pr">hee-toh-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Two please</span><span class="jp">二つください</span><span class="ro">Futatsu kudasai</span><span class="pr">foo-tah-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Three please</span><span class="jp">三つください</span><span class="ro">Mittsu kudasai</span><span class="pr">meet-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Four please</span><span class="jp">四つください</span><span class="ro">Yottsu kudasai</span><span class="pr">yoht-tsu koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Water, please</span><span class="jp">お水ください</span><span class="ro">Omizu kudasai</span><span class="pr">oh-mee-zoo koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Another beer, please</span><span class="jp">ビールもう一杯</span><span class="ro">Bīru mō ippai</span><span class="pr">bee-roo moh ee-pie</span></div><div class="vocabLine"><span class="en">Check, please</span><span class="jp">お会計お願いします</span><span class="ro">Okaikei onegaishimasu</span><span class="pr">oh-kai-kay oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">It’s delicious</span><span class="jp">おいしいです</span><span class="ro">Oishii desu</span><span class="pr">oh-ee-shee dess</span></div><div class="vocabLine"><span class="en">How many people?</span><span class="jp">何名様ですか？</span><span class="ro">Nan-mei sama desu ka?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">What would you like to order?</span><span class="jp">ご注文は？</span><span class="ro">Go-chūmon wa?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">This way, please.</span><span class="jp">こちらへどうぞ</span><span class="ro">Kochira e dōzo</span><span class="pr"></span></div></div></details><details class="details" ><summary>Cafés &amp; Coffee</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Coffee please</span><span class="jp">コーヒーください</span><span class="ro">Kōhī kudasai</span><span class="pr">koh-hee koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Hot or iced?</span><span class="jp">ホットですか、アイスですか</span><span class="ro">Hotto desu ka, aisu desu ka</span><span class="pr">hoht-to dess kah, eye-soo dess kah</span></div><div class="vocabLine"><span class="en">I’ll have this</span><span class="jp">これにします</span><span class="ro">Kore ni shimasu</span><span class="pr">koh-reh nee shee-mas</span></div><div class="vocabLine"><span class="en">For here</span><span class="jp">店内で</span><span class="ro">Tennai de</span><span class="pr">ten-nye deh</span></div><div class="vocabLine"><span class="en">To go</span><span class="jp">持ち帰りで</span><span class="ro">Mochikaeri de</span><span class="pr">moh-chee-kye-ree deh</span></div><div class="vocabLine"><span class="en">For here?</span><span class="jp">店内ですか？</span><span class="ro">Tennai desu ka?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">To go?</span><span class="jp">お持ち帰りですか？</span><span class="ro">Omochikaeri desu ka?</span><span class="pr"></span></div><div class="vocabLine"><span class="en">Credit card OK?</span><span class="jp">カードは使えますか</span><span class="ro">Kādo wa tsukaemasu ka</span><span class="pr">kah-doh wah tsoo-kai-mahs kah</span></div></div></details></details><details class="details" ><summary>Grammar</summary><details class="details" ><summary>Particles</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Topic marker (wa)</span><span class="jp">は</span><span class="ro">wa</span><span class="pr">wa</span></div><div class="vocabLine"><span class="en">Object marker (o)</span><span class="jp">を</span><span class="ro">o</span><span class="pr">o</span></div><div class="vocabLine"><span class="en">Question marker (ka)</span><span class="jp">か</span><span class="ro">ka</span><span class="pr">ka</span></div><div class="vocabLine"><span class="en">Destination / time (ni)</span><span class="jp">に</span><span class="ro">ni</span><span class="pr">ni</span></div><div class="vocabLine"><span class="en">Location of action (de)</span><span class="jp">で</span><span class="ro">de</span><span class="pr">de</span></div></div></details><details class="details" ><summary>Counters</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">General counter (1–9): 1</span><span class="jp">一つ/1つ</span><span class="ro">hitotsu</span><span class="pr">hitotsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 2</span><span class="jp">二つ/2つ</span><span class="ro">futatsu</span><span class="pr">futatsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 3</span><span class="jp">三つ/3つ</span><span class="ro">mittsu</span><span class="pr">mittsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 4</span><span class="jp">四つ/4つ</span><span class="ro">yottsu</span><span class="pr">yottsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 5</span><span class="jp">五つ/5つ</span><span class="ro">itsutsu</span><span class="pr">itsutsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 6</span><span class="jp">六つ/6つ</span><span class="ro">muttsu</span><span class="pr">muttsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 7</span><span class="jp">七つ/7つ</span><span class="ro">nanatsu</span><span class="pr">nanatsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 8</span><span class="jp">八つ/8つ</span><span class="ro">yattsu</span><span class="pr">yattsu</span></div><div class="vocabLine"><span class="en">General counter (1–9): 9</span><span class="jp">九つ/9つ</span><span class="ro">kokonotsu</span><span class="pr">kokonotsu</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 1</span><span class="jp">一個</span><span class="ro">ikko</span><span class="pr">ikko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 6</span><span class="jp">六個</span><span class="ro">rokko</span><span class="pr">rokko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 8</span><span class="jp">八個</span><span class="ro">hakko</span><span class="pr">hakko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 10</span><span class="jp">十個</span><span class="ro">jukko</span><span class="pr">jukko</span></div><div class="vocabLine"><span class="en">Counter for things (ko): 100</span><span class="jp">百個</span><span class="ro">hyakko</span><span class="pr">hyakko</span></div><div class="vocabLine"><span class="en">People counter: 1 person</span><span class="jp">一人</span><span class="ro">hitori</span><span class="pr">hitori</span></div><div class="vocabLine"><span class="en">People counter: 2 people</span><span class="jp">二人</span><span class="ro">futari</span><span class="pr">futari</span></div><div class="vocabLine"><span class="en">People counter (suffix)</span><span class="jp">人</span><span class="ro">nin</span><span class="pr">nin</span></div><div class="vocabLine"><span class="en">Flat objects counter</span><span class="jp">枚</span><span class="ro">mai</span><span class="pr">mai</span></div><div class="vocabLine"><span class="en">Long/cylindrical objects counter</span><span class="jp">本</span><span class="ro">hon</span><span class="pr">hon</span></div><div class="vocabLine"><span class="en">Books/notebooks counter</span><span class="jp">冊</span><span class="ro">satsu</span><span class="pr">satsu</span></div><div class="vocabLine"><span class="en">Machines/vehicles/furniture counter</span><span class="jp">台</span><span class="ro">dai</span><span class="pr">dai</span></div><div class="vocabLine"><span class="en">Small animals/insects/fish counter</span><span class="jp">匹</span><span class="ro">hiki</span><span class="pr">hiki</span></div><div class="vocabLine"><span class="en">Large animals counter</span><span class="jp">頭</span><span class="ro">tō</span><span class="pr">toh</span></div><div class="vocabLine"><span class="en">Birds/rabbits counter</span><span class="jp">羽</span><span class="ro">wa</span><span class="pr">wa</span></div><div class="vocabLine"><span class="en">Number of times counter</span><span class="jp">回</span><span class="ro">kai</span><span class="pr">kai</span></div><div class="vocabLine"><span class="en">Minutes counter</span><span class="jp">分</span><span class="ro">fun</span><span class="pr">fun</span></div><div class="vocabLine"><span class="en">Age counter</span><span class="jp">歳</span><span class="ro">sai</span><span class="pr">sai</span></div><div class="vocabLine"><span class="en">Age: 20 years old</span><span class="jp">二十歳</span><span class="ro">hatachi</span><span class="pr">hatachi</span></div></div></details></details><details class="details" ><summary>Beginner</summary><details class="details" ><summary>Key Phrases</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Yes</span><span class="jp">はい</span><span class="ro">Hai</span><span class="pr">hai</span></div><div class="vocabLine"><span class="en">No</span><span class="jp">いいえ</span><span class="ro">Iie</span><span class="pr">ee-eh</span></div><div class="vocabLine"><span class="en">What is your name?</span><span class="jp">名前はなんですか</span><span class="ro">Namae wa nan desu ka</span><span class="pr">nah-mah-eh wah nahn dess kah</span></div><div class="vocabLine"><span class="en">I am ~</span><span class="jp">私は〜です</span><span class="ro">Watashi wa ~ desu</span><span class="pr">wah-tah-shee wah dess</span></div><div class="vocabLine"><span class="en">I came from ~ / I am from ~</span><span class="jp">〜から来ました</span><span class="ro">~ kara kimashita</span><span class="pr">kah-rah kee-mah-shee-tah</span></div><div class="vocabLine"><span class="en">What is this?</span><span class="jp">これは何ですか</span><span class="ro">Kore wa nan desu ka</span><span class="pr">koh-reh wah nahn dess kah</span></div><div class="vocabLine"><span class="en">How much?</span><span class="jp">いくらですか</span><span class="ro">Ikura desu ka</span><span class="pr">ee-koo-rah dess kah</span></div><div class="vocabLine"><span class="en">Can I get this one? / I&#x27;ll take this one</span><span class="jp">これください</span><span class="ro">Kore kudasai</span><span class="pr">koh-reh koo-dah-sigh</span></div><div class="vocabLine"><span class="en">Please</span><span class="jp">おねがいします</span><span class="ro">Onegaishimasu</span><span class="pr">oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Can I place an order?</span><span class="jp">注文お願いします</span><span class="ro">Chūmon onegaishimasu</span><span class="pr">choo-mohn oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Water please</span><span class="jp">水をお願いします</span><span class="ro">Mizu o onegaishimasu</span><span class="pr">mee-zoo oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Can I get the check/bill?</span><span class="jp">お会計お願いします</span><span class="ro">Okaikei onegaishimasu</span><span class="pr">oh-kai-kay oh-neh-guy-shee-mas</span></div><div class="vocabLine"><span class="en">Where am I?</span><span class="jp">ここはどこですか</span><span class="ro">Koko wa doko desu ka</span><span class="pr">koh-koh wah doh-koh dess kah</span></div><div class="vocabLine"><span class="en">Where is the bathroom?</span><span class="jp">トイレはどこですか</span><span class="ro">Toire wa doko desu ka</span><span class="pr">toy-reh wah doh-koh dess kah</span></div><div class="vocabLine"><span class="en">Where is the train station?</span><span class="jp">駅はどこですか</span><span class="ro">Eki wa doko desu ka</span><span class="pr">eh-kee wah doh-koh dess kah</span></div><div class="vocabLine"><span class="en">What time is it now?</span><span class="jp">今何時ですか</span><span class="ro">Ima nan ji desu ka</span><span class="pr">ee-mah nahn jee dess kah</span></div><div class="vocabLine"><span class="en">I don&#x27;t understand</span><span class="jp">わかりません</span><span class="ro">Wakarimasen</span><span class="pr">wah-kah-ree-mah-sen</span></div><div class="vocabLine"><span class="en">I can&#x27;t speak Japanese</span><span class="jp">日本語を話せません</span><span class="ro">Nihongo o hanasemasen</span><span class="pr">nee-hohn-goh oh hah-nah-seh-mah-sen</span></div></div></details><details class="details" ><summary>Greetings</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Good morning</span><span class="jp">おはようございます</span><span class="ro">Ohayō gozaimasu</span><span class="pr">oh-hah-yoh goh-zah-ee-mas</span></div><div class="vocabLine"><span class="en">Good afternoon</span><span class="jp">こんにちは</span><span class="ro">Konnichiwa</span><span class="pr">kon-nee-chee-wah</span></div><div class="vocabLine"><span class="en">Good evening</span><span class="jp">こんばんは</span><span class="ro">Konbanwa</span><span class="pr">kon-bahn-wah</span></div><div class="vocabLine"><span class="en">Thank you</span><span class="jp">ありがとうございます</span><span class="ro">Arigatō gozaimasu</span><span class="pr">ah-ree-gah-toh goh-zah-ee-mas</span></div><div class="vocabLine"><span class="en">Excuse me / I&#x27;m sorry</span><span class="jp">すみません</span><span class="ro">Sumimasen</span><span class="pr">soo-mee-mah-sen</span></div></div></details><details class="details" ><summary>People &amp; Pronouns</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">I (watashi / boku / ore)</span><span class="jp">私、僕、俺</span><span class="ro">Watashi / Boku / Ore</span><span class="pr"></span></div><div class="vocabLine"><span class="en">Friend</span><span class="jp">友達</span><span class="ro">Tomodachi</span><span class="pr">toh-moh-dah-chee</span></div><div class="vocabLine"><span class="en">Co-worker</span><span class="jp">同僚</span><span class="ro">Dōryō</span><span class="pr">doh-ryoh</span></div><div class="vocabLine"><span class="en">Boss / Company president</span><span class="jp">部長、社長</span><span class="ro">Buchō / Shachō</span><span class="pr">boo-choh / shah-choh</span></div><div class="vocabLine"><span class="en">Family</span><span class="jp">家族</span><span class="ro">Kazoku</span><span class="pr">kah-zoh-koo</span></div><div class="vocabLine"><span class="en">Father</span><span class="jp">お父さん</span><span class="ro">Otō-san</span><span class="pr">oh-toh-san</span></div><div class="vocabLine"><span class="en">Mother</span><span class="jp">お母さん</span><span class="ro">Okā-san</span><span class="pr">oh-kah-san</span></div><div class="vocabLine"><span class="en">Older brother</span><span class="jp">お兄さん</span><span class="ro">Onii-san</span><span class="pr">oh-nee-san</span></div><div class="vocabLine"><span class="en">Older sister</span><span class="jp">お姉さん</span><span class="ro">Onee-san</span><span class="pr">oh-neh-san</span></div><div class="vocabLine"><span class="en">Younger brother</span><span class="jp">弟</span><span class="ro">Otōto</span><span class="pr">oh-toh-toh</span></div><div class="vocabLine"><span class="en">Younger sister</span><span class="jp">妹</span><span class="ro">Imōto</span><span class="pr">ee-moh-toh</span></div><div class="vocabLine"><span class="en">Adults</span><span class="jp">大人</span><span class="ro">Otona</span><span class="pr">oh-toh-nah</span></div><div class="vocabLine"><span class="en">Children</span><span class="jp">子供</span><span class="ro">Kodomo</span><span class="pr">koh-doh-moh</span></div><div class="vocabLine"><span class="en">Boyfriend</span><span class="jp">彼氏</span><span class="ro">Kareshi</span><span class="pr">kah-reh-shee</span></div><div class="vocabLine"><span class="en">Girlfriend</span><span class="jp">彼女</span><span class="ro">Kanojo</span><span class="pr">kah-noh-joh</span></div><div class="vocabLine"><span class="en">Man</span><span class="jp">男の人</span><span class="ro">Otoko no hito</span><span class="pr">oh-toh-koh noh hee-toh</span></div><div class="vocabLine"><span class="en">Woman</span><span class="jp">女の人</span><span class="ro">Onna no hito</span><span class="pr">ohn-nah noh hee-toh</span></div></div></details><details class="details" ><summary>Food &amp; Drink</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">Breakfast</span><span class="jp">朝ご飯</span><span class="ro">Asa-gohan</span><span class="pr">ah-sah goh-hahn</span></div><div class="vocabLine"><span class="en">Lunch</span><span class="jp">昼ご飯</span><span class="ro">Hiru-gohan</span><span class="pr">hee-roo goh-hahn</span></div><div class="vocabLine"><span class="en">Dinner</span><span class="jp">夜ご飯</span><span class="ro">Yoru-gohan</span><span class="pr">yoh-roo goh-hahn</span></div><div class="vocabLine"><span class="en">Rice / Meal</span><span class="jp">ご飯</span><span class="ro">Gohan</span><span class="pr">goh-hahn</span></div><div class="vocabLine"><span class="en">Bread</span><span class="jp">パン</span><span class="ro">Pan</span><span class="pr">pahn</span></div><div class="vocabLine"><span class="en">Meat</span><span class="jp">肉</span><span class="ro">Niku</span><span class="pr">nee-koo</span></div><div class="vocabLine"><span class="en">Fish</span><span class="jp">魚</span><span class="ro">Sakana</span><span class="pr">sah-kah-nah</span></div><div class="vocabLine"><span class="en">Vegetables</span><span class="jp">野菜</span><span class="ro">Yasai</span><span class="pr">yah-sigh</span></div><div class="vocabLine"><span class="en">Fruits</span><span class="jp">果物</span><span class="ro">Kudamono</span><span class="pr">koo-dah-moh-noh</span></div><div class="vocabLine"><span class="en">Soup</span><span class="jp">スープ</span><span class="ro">Sūpu</span><span class="pr">soo-poo</span></div><div class="vocabLine"><span class="en">Salad</span><span class="jp">サラダ</span><span class="ro">Sarada</span><span class="pr">sah-rah-dah</span></div><div class="vocabLine"><span class="en">Egg</span><span class="jp">卵</span><span class="ro">Tamago</span><span class="pr">tah-mah-goh</span></div><div class="vocabLine"><span class="en">Milk</span><span class="jp">牛乳</span><span class="ro">Gyūnyū</span><span class="pr">gyoo-nyoo</span></div><div class="vocabLine"><span class="en">Cheese</span><span class="jp">チーズ</span><span class="ro">Chīzu</span><span class="pr">chee-zoo</span></div><div class="vocabLine"><span class="en">Dessert</span><span class="jp">デザート</span><span class="ro">Dezāto</span><span class="pr">deh-zah-toh</span></div><div class="vocabLine"><span class="en">Water</span><span class="jp">水</span><span class="ro">Mizu</span><span class="pr">mee-zoo</span></div><div class="vocabLine"><span class="en">Tea / Green tea</span><span class="jp">お茶</span><span class="ro">Ocha</span><span class="pr">oh-chah</span></div><div class="vocabLine"><span class="en">Coffee</span><span class="jp">コーヒー</span><span class="ro">Kōhī</span><span class="pr">koh-hee</span></div><div class="vocabLine"><span class="en">Alcohol / Sake</span><span class="jp">お酒</span><span class="ro">Osake</span><span class="pr">oh-sah-keh</span></div><div class="vocabLine"><span class="en">Wine</span><span class="jp">ワイン</span><span class="ro">Wain</span><span class="pr">wah-een</span></div><div class="vocabLine"><span class="en">Beer</span><span class="jp">ビール</span><span class="ro">Bīru</span><span class="pr">bee-roo</span></div></div></details><details class="details" ><summary>Numbers</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">1</span><span class="jp">一</span><span class="ro">ichi</span><span class="pr">ee-chee</span></div><div class="vocabLine"><span class="en">2</span><span class="jp">二</span><span class="ro">ni</span><span class="pr">nee</span></div><div class="vocabLine"><span class="en">3</span><span class="jp">三</span><span class="ro">san</span><span class="pr">sahn</span></div><div class="vocabLine"><span class="en">4</span><span class="jp">四</span><span class="ro">yon</span><span class="pr">yohn</span></div><div class="vocabLine"><span class="en">5</span><span class="jp">五</span><span class="ro">go</span><span class="pr">goh</span></div><div class="vocabLine"><span class="en">6</span><span class="jp">六</span><span class="ro">roku</span><span class="pr">roh-koo</span></div><div class="vocabLine"><span class="en">7</span><span class="jp">七</span><span class="ro">nana</span><span class="pr">nah-nah</span></div><div class="vocabLine"><span class="en">8</span><span class="jp">八</span><span class="ro">hachi</span><span class="pr">hah-chee</span></div><div class="vocabLine"><span class="en">9</span><span class="jp">九</span><span class="ro">kyū</span><span class="pr">kyoo</span></div><div class="vocabLine"><span class="en">10</span><span class="jp">十</span><span class="ro">jū</span><span class="pr">joo</span></div><div class="vocabLine"><span class="en">11</span><span class="jp">十一</span><span class="ro">jūichi</span><span class="pr">joo-ee-chee</span></div><div class="vocabLine"><span class="en">12</span><span class="jp">十二</span><span class="ro">jūni</span><span class="pr">joo-nee</span></div><div class="vocabLine"><span class="en">20</span><span class="jp">二十</span><span class="ro">nijū</span><span class="pr">nee-joo</span></div><div class="vocabLine"><span class="en">21</span><span class="jp">二十一</span><span class="ro">nijūichi</span><span class="pr">nee-joo-ee-chee</span></div><div class="vocabLine"><span class="en">30</span><span class="jp">三十</span><span class="ro">sanjū</span><span class="pr">sahn-joo</span></div><div class="vocabLine"><span class="en">32</span><span class="jp">三十二</span><span class="ro">sanjūni</span><span class="pr">sahn-joo-nee</span></div><div class="vocabLine"><span class="en">40</span><span class="jp">四十</span><span class="ro">yonjū</span><span class="pr">yohn-joo</span></div><div class="vocabLine"><span class="en">43</span><span class="jp">四十三</span><span class="ro">yonjūsan</span><span class="pr">yohn-joo-sahn</span></div><div class="vocabLine"><span class="en">50</span><span class="jp">五十</span><span class="ro">gojū</span><span class="pr">goh-joo</span></div><div class="vocabLine"><span class="en">54</span><span class="jp">五十四</span><span class="ro">gojūyon</span><span class="pr">goh-joo-yohn</span></div><div class="vocabLine"><span class="en">60</span><span class="jp">六十</span><span class="ro">rokujū</span><span class="pr">roh-koo-joo</span></div><div class="vocabLine"><span class="en">65</span><span class="jp">六十五</span><span class="ro">rokujūgo</span><span class="pr">roh-koo-joo-goh</span></div><div class="vocabLine"><span class="en">70</span><span class="jp">七十</span><span class="ro">nanajū</span><span class="pr">nah-nah-joo</span></div><div class="vocabLine"><span class="en">76</span><span class="jp">七十六</span><span class="ro">nanajūroku</span><span class="pr">nah-nah-joo-roh-koo</span></div><div class="vocabLine"><span class="en">80</span><span class="jp">八十</span><span class="ro">hachijū</span><span class="pr">hah-chee-joo</span></div><div class="vocabLine"><span class="en">87</span><span class="jp">八十七</span><span class="ro">hachijūnana</span><span class="pr">hah-chee-joo-nah-nah</span></div><div class="vocabLine"><span class="en">90</span><span class="jp">九十</span><span class="ro">kyūjū</span><span class="pr">kyoo-joo</span></div><div class="vocabLine"><span class="en">98</span><span class="jp">九十八</span><span class="ro">kyūjūhachi</span><span class="pr">kyoo-joo-hah-chee</span></div><div class="vocabLine"><span class="en">100</span><span class="jp">百</span><span class="ro">hyaku</span><span class="pr">hyah-koo</span></div><div class="vocabLine"><span class="en">1000</span><span class="jp">千</span><span class="ro">sen</span><span class="pr">sen</span></div><div class="vocabLine"><span class="en">2000</span><span class="jp">二千</span><span class="ro">nisen</span><span class="pr">nee-sen</span></div><div class="vocabLine"><span class="en">3000</span><span class="jp">三千</span><span class="ro">sanzen</span><span class="pr">sahn-zen</span></div><div class="vocabLine"><span class="en">5000</span><span class="jp">五千</span><span class="ro">gosen</span><span class="pr">goh-sen</span></div></div></details><details class="details" ><summary>Essential Verbs</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">to eat</span><span class="jp">食べる</span><span class="ro">Taberu</span><span class="pr">tah-beh-roo</span></div><div class="vocabLine"><span class="en">to go</span><span class="jp">行く</span><span class="ro">Iku</span><span class="pr">ee-koo</span></div><div class="vocabLine"><span class="en">to drink</span><span class="jp">飲む</span><span class="ro">Nomu</span><span class="pr">noh-moo</span></div><div class="vocabLine"><span class="en">to listen / hear</span><span class="jp">聞く</span><span class="ro">Kiku</span><span class="pr">kee-koo</span></div><div class="vocabLine"><span class="en">to read</span><span class="jp">読む</span><span class="ro">Yomu</span><span class="pr">yoh-moo</span></div><div class="vocabLine"><span class="en">to see / look / watch</span><span class="jp">見る</span><span class="ro">Miru</span><span class="pr">mee-roo</span></div><div class="vocabLine"><span class="en">to sleep</span><span class="jp">寝る</span><span class="ro">Neru</span><span class="pr">neh-roo</span></div><div class="vocabLine"><span class="en">to wake up</span><span class="jp">起きる</span><span class="ro">Okiru</span><span class="pr">oh-kee-roo</span></div><div class="vocabLine"><span class="en">to speak / talk</span><span class="jp">話す</span><span class="ro">Hanasu</span><span class="pr">hah-nah-soo</span></div><div class="vocabLine"><span class="en">to return / go back</span><span class="jp">帰る</span><span class="ro">Kaeru</span><span class="pr">kah-eh-roo</span></div><div class="vocabLine"><span class="en">to sit down</span><span class="jp">座る</span><span class="ro">Suwaru</span><span class="pr">soo-wah-roo</span></div><div class="vocabLine"><span class="en">to stand up</span><span class="jp">立つ</span><span class="ro">Tatsu</span><span class="pr">tah-tsoo</span></div><div class="vocabLine"><span class="en">to swim</span><span class="jp">泳ぐ</span><span class="ro">Oyogu</span><span class="pr">oh-yoh-goo</span></div><div class="vocabLine"><span class="en">to play</span><span class="jp">遊ぶ</span><span class="ro">Asobu</span><span class="pr">ah-soh-boo</span></div><div class="vocabLine"><span class="en">to ride</span><span class="jp">乗る</span><span class="ro">Noru</span><span class="pr">noh-roo</span></div><div class="vocabLine"><span class="en">to buy</span><span class="jp">買う</span><span class="ro">Kau</span><span class="pr">kah-oo</span></div><div class="vocabLine"><span class="en">to meet</span><span class="jp">会う</span><span class="ro">Au</span><span class="pr">ah-oo</span></div><div class="vocabLine"><span class="en">to write</span><span class="jp">書く</span><span class="ro">Kaku</span><span class="pr">kah-koo</span></div><div class="vocabLine"><span class="en">to wait</span><span class="jp">待つ</span><span class="ro">Matsu</span><span class="pr">mah-tsoo</span></div><div class="vocabLine"><span class="en">to take a picture</span><span class="jp">撮る</span><span class="ro">Toru</span><span class="pr">toh-roo</span></div></div></details></details><details class="details" ><summary>N5 Core</summary><details class="details" ><summary>N5 Verbs</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">to do</span><span class="jp">する</span><span class="ro">suru</span><span class="pr">soo-roo</span></div><div class="vocabLine"><span class="en">to go</span><span class="jp">行く</span><span class="ro">iku</span><span class="pr">ee-koo</span></div><div class="vocabLine"><span class="en">to come</span><span class="jp">来る</span><span class="ro">kuru</span><span class="pr">koo-roo</span></div><div class="vocabLine"><span class="en">to eat</span><span class="jp">食べる</span><span class="ro">taberu</span><span class="pr">tah-beh-roo</span></div><div class="vocabLine"><span class="en">to drink</span><span class="jp">飲む</span><span class="ro">nomu</span><span class="pr">noh-moo</span></div><div class="vocabLine"><span class="en">to see / watch</span><span class="jp">見る</span><span class="ro">miru</span><span class="pr">mee-roo</span></div><div class="vocabLine"><span class="en">to listen / hear</span><span class="jp">聞く</span><span class="ro">kiku</span><span class="pr">kee-koo</span></div><div class="vocabLine"><span class="en">to speak</span><span class="jp">話す</span><span class="ro">hanasu</span><span class="pr">hah-nah-soo</span></div><div class="vocabLine"><span class="en">to read</span><span class="jp">読む</span><span class="ro">yomu</span><span class="pr">yoh-moo</span></div><div class="vocabLine"><span class="en">to write</span><span class="jp">書く</span><span class="ro">kaku</span><span class="pr">kah-koo</span></div><div class="vocabLine"><span class="en">to buy</span><span class="jp">買う</span><span class="ro">kau</span><span class="pr">kah-oo</span></div><div class="vocabLine"><span class="en">to wait</span><span class="jp">待つ</span><span class="ro">matsu</span><span class="pr">mah-tsoo</span></div><div class="vocabLine"><span class="en">to know</span><span class="jp">知る</span><span class="ro">shiru</span><span class="pr">shee-roo</span></div><div class="vocabLine"><span class="en">to understand</span><span class="jp">分かる</span><span class="ro">wakaru</span><span class="pr">wah-kah-roo</span></div><div class="vocabLine"><span class="en">to use</span><span class="jp">使う</span><span class="ro">tsukau</span><span class="pr">tsoo-kah-oo</span></div></div></details><details class="details" ><summary>N5 Adjectives</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">good</span><span class="jp">いい</span><span class="ro">ii</span><span class="pr">ee-ee</span></div><div class="vocabLine"><span class="en">bad</span><span class="jp">悪い</span><span class="ro">warui</span><span class="pr">wah-roo-ee</span></div><div class="vocabLine"><span class="en">big</span><span class="jp">大きい</span><span class="ro">ōkii</span><span class="pr">oh-kee-ee</span></div><div class="vocabLine"><span class="en">small</span><span class="jp">小さい</span><span class="ro">chiisai</span><span class="pr">chee-ee-sai</span></div><div class="vocabLine"><span class="en">new</span><span class="jp">新しい</span><span class="ro">atarashii</span><span class="pr">ah-tah-rah-shee-ee</span></div><div class="vocabLine"><span class="en">old (thing)</span><span class="jp">古い</span><span class="ro">furui</span><span class="pr">foo-roo-ee</span></div><div class="vocabLine"><span class="en">hot (weather/food)</span><span class="jp">暑い / 熱い</span><span class="ro">atsui</span><span class="pr">ah-tsoo-ee</span></div><div class="vocabLine"><span class="en">cold</span><span class="jp">寒い / 冷たい</span><span class="ro">samui / tsumetai</span><span class="pr">sah-moo-ee / tsoo-meh-tai</span></div><div class="vocabLine"><span class="en">expensive</span><span class="jp">高い</span><span class="ro">takai</span><span class="pr">tah-kai</span></div><div class="vocabLine"><span class="en">cheap</span><span class="jp">安い</span><span class="ro">yasui</span><span class="pr">yah-soo-ee</span></div><div class="vocabLine"><span class="en">busy</span><span class="jp">忙しい</span><span class="ro">isogashii</span><span class="pr">ee-soh-gah-shee-ee</span></div><div class="vocabLine"><span class="en">free (available)</span><span class="jp">暇</span><span class="ro">hima</span><span class="pr">hee-mah</span></div></div></details><details class="details" ><summary>N5 Nouns</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">person</span><span class="jp">人</span><span class="ro">hito</span><span class="pr">hee-toh</span></div><div class="vocabLine"><span class="en">friend</span><span class="jp">友達</span><span class="ro">tomodachi</span><span class="pr">toh-moh-dah-chee</span></div><div class="vocabLine"><span class="en">family</span><span class="jp">家族</span><span class="ro">kazoku</span><span class="pr">kah-zoh-koo</span></div><div class="vocabLine"><span class="en">time</span><span class="jp">時間</span><span class="ro">jikan</span><span class="pr">jee-kahn</span></div><div class="vocabLine"><span class="en">money</span><span class="jp">お金</span><span class="ro">okane</span><span class="pr">oh-kah-neh</span></div><div class="vocabLine"><span class="en">place</span><span class="jp">場所</span><span class="ro">basho</span><span class="pr">bah-shoh</span></div><div class="vocabLine"><span class="en">thing</span><span class="jp">物</span><span class="ro">mono</span><span class="pr">moh-noh</span></div><div class="vocabLine"><span class="en">shop/store</span><span class="jp">店</span><span class="ro">mise</span><span class="pr">mee-seh</span></div><div class="vocabLine"><span class="en">restaurant</span><span class="jp">レストラン</span><span class="ro">resutoran</span><span class="pr">reh-soo-toh-rahn</span></div><div class="vocabLine"><span class="en">hotel</span><span class="jp">ホテル</span><span class="ro">hoteru</span><span class="pr">hoh-teh-roo</span></div><div class="vocabLine"><span class="en">station</span><span class="jp">駅</span><span class="ro">eki</span><span class="pr">eh-kee</span></div><div class="vocabLine"><span class="en">bathroom</span><span class="jp">トイレ</span><span class="ro">toire</span><span class="pr">toy-reh</span></div></div></details><details class="details" ><summary>N5 Expressions</summary><div class="vocabBlock"><div class="vocabHeader"><span>English</span><span>Japanese</span><span>Romaji</span><span>Pronunciation</span></div><div class="vocabLine"><span class="en">what</span><span class="jp">何</span><span class="ro">nani</span><span class="pr">nah-nee</span></div><div class="vocabLine"><span class="en">where</span><span class="jp">どこ</span><span class="ro">doko</span><span class="pr">doh-koh</span></div><div class="vocabLine"><span class="en">when</span><span class="jp">いつ</span><span class="ro">itsu</span><span class="pr">ee-tsoo</span></div><div class="vocabLine"><span class="en">who</span><span class="jp">誰</span><span class="ro">dare</span><span class="pr">dah-reh</span></div><div class="vocabLine"><span class="en">which</span><span class="jp">どれ</span><span class="ro">dore</span><span class="pr">doh-reh</span></div><div class="vocabLine"><span class="en">how</span><span class="jp">どう</span><span class="ro">dō</span><span class="pr">doh</span></div><div class="vocabLine"><span class="en">how much</span><span class="jp">いくら</span><span class="ro">ikura</span><span class="pr">ee-koo-rah</span></div><div class="vocabLine"><span class="en">why</span><span class="jp">なぜ</span><span class="ro">naze</span><span class="pr">nah-zeh</span></div><div class="vocabLine"><span class="en">today</span><span class="jp">今日</span><span class="ro">kyō</span><span class="pr">kyoh</span></div><div class="vocabLine"><span class="en">tomorrow</span><span class="jp">明日</span><span class="ro">ashita</span><span class="pr">ah-shee-tah</span></div><div class="vocabLine"><span class="en">yesterday</span><span class="jp">昨日</span><span class="ro">kinō</span><span class="pr">kee-noh</span></div><div class="vocabLine"><span class="en">morning</span><span class="jp">朝</span><span class="ro">asa</span><span class="pr">ah-sah</span></div><div class="vocabLine"><span class="en">afternoon</span><span class="jp">午後</span><span class="ro">gogo</span><span class="pr">goh-goh</span></div><div class="vocabLine"><span class="en">night</span><span class="jp">夜</span><span class="ro">yoru</span><span class="pr">yoh-roo</span></div><div class="vocabLine"><span class="en">now</span><span class="jp">今</span><span class="ro">ima</span><span class="pr">ee-mah</span></div><div class="vocabLine"><span class="en">later</span><span class="jp">後で</span><span class="ro">atode</span><span class="pr">ah-toh-deh</span></div></div></details></details></div>
+</section></main></div>
+
+<script>
+(function(){
+  const btn = document.getElementById('tocBtn');
+  const backdrop = document.getElementById('tocBackdrop');
+  const close = () => document.body.classList.remove('tocOpen');
+  const toggle = () => document.body.classList.toggle('tocOpen');
+  if(btn) btn.addEventListener('click', toggle);
+  if(backdrop) backdrop.addEventListener('click', close);
+  // Close on ESC
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') close(); });
+  // Close after clicking a TOC link
+  document.querySelectorAll('.tocLink').forEach(a => a.addEventListener('click', close));
+})();
+</script>
+
+</body>
+</html>
